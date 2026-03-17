@@ -12,7 +12,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // frontend Links
-const allowedOrigins = [ "http://localhost/8000", "https://jobhub-lilac-sigma.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://jobhub-lilac-sigma.vercel.app",
+  "https://jobhub-git-main-bhagatbhutales-projects.vercel.app",
+];
 
 //middleware
 app.use(express.json());
