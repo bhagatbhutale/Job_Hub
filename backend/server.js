@@ -11,14 +11,15 @@ dotenv.config({});
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
+// frontend Links
+const allowedOrigins = [ "http://localhost/8000", "https://jobhub-lilac-sigma.vercel.app"];
 
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const corsOptions = {
-  origin: "https://jobhub-lilac-sigma.vercel.app/",
+  origin: allowedOrigins,
   credentials: true,
 };
 app.use(cors(corsOptions))
