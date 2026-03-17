@@ -12,32 +12,23 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // frontend Links
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://jobhub-lilac-sigma.vercel.app",
-  "https://jobhub-git-main-bhagatbhutales-projects.vercel.app",
-];
+// const allowedOrigins = [
+//   "http://localhost:5173",
+//   "https://jobhub-lilac-sigma.vercel.app",
+//   "https://jobhub-git-main-bhagatbhutales-projects.vercel.app",
+// ];
 
 //middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (
-        !origin ||
-        origin.includes("vercel.app") ||
-        origin.includes("localhost")
-      ) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: ["http://localhost:5173", "https://jobhub-lilac-sigma.vercel.app"],
     credentials: true,
   }),
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use(cors(corsOptions))
 
 
