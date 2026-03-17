@@ -24,6 +24,7 @@ const Navbar = () => {
 
   // Logout APi here 
   const logoutHandler = async () => {
+    console.log("API HIT")
     try {
       const res = await axios.get(`${USER_API_END_POINT}/logout`, {
         withCredentials:true
