@@ -22,10 +22,22 @@ const allowedOrigins = [
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-const corsOptions = {
-  origin: allowedOrigins,
-  credentials: true,
-};
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (
+        !origin ||
+        origin.includes("vercel.app") ||
+        origin.includes("localhost")
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }),
+);
 app.use(cors(corsOptions))
 
 
