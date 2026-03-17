@@ -1,0 +1,107 @@
+
+Backend
+
+cookie-parser
+cors
+
+
+28-01-26   
+backend done   21:44
+
+Navbar Work       23:11
+video 03:31:12
+
+29-01-26  09:50
+
+30-01-26 
+
+27-02-26 
+Today i have started a building a Next part of this project 
+07:42 Minute zala aahe video
+
+02-06-26
+08:15:00 hours zale video : today word end 16:34
+
+03-03-26
+
+10-03-26
+11:33 start 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+
+export function RadioGroupDemo() {
+  return (
+    <RadioGroup defaultValue="comfortable" className="w-fit">
+      <div className="flex items-center gap-3">
+        <RadioGroupItem value="default" id="r1" />
+        <Label htmlFor="r1">Default</Label>
+      </div>
+      <div className="flex items-center gap-3">
+        <RadioGroupItem value="comfortable" id="r2" />
+        <Label htmlFor="r2">Comfortable</Label>
+      </div>
+      <div className="flex items-center gap-3">
+        <RadioGroupItem value="compact" id="r3" />
+        <Label htmlFor="r3">Compact</Label>
+      </div>
+    </RadioGroup>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+export function AvatarWithBadge() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+      <AvatarFallback>CN</AvatarFallback>
+      <AvatarBadge className="bg-green-600 dark:bg-green-800" />
+    </Avatar>
+  )
+}
