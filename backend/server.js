@@ -28,6 +28,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions))
 
+ await connectDB();
+
 
 
 // apis
@@ -40,7 +42,8 @@ app.use("/", (req, res) => {
     res.send("Welcome to JobHub Backend");
 })
 
+
 app.listen(PORT, () => {
-    connectDB()
+   
     console.log(`Server is running on port http://localhost:${PORT}...`);
 })
