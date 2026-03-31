@@ -29,8 +29,14 @@ const { loading , user} = useSelector(store=> store.auth)
     setInput({...input, [e.target.name]: e.target.value})
   }
 
-
     const submitHandler = async (e) => {
+      e.preventDefault()
+
+      if(!user || !isPasswordMatch) {
+alert("Input field is Required for Correct.");
+return
+      }
+
       e.preventDefault()
       try {
         dispatch(setLoading(true))

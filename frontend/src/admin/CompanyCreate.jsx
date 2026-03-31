@@ -17,6 +17,11 @@ const CompanyCreate = () => {
 
   //Apis
   const registerNewCompany = async () => {
+    // Does not provide a Value
+    if (!companyName) {
+    alert("Company name is required !");
+    return;
+  }
     try {
       const res = await axios.post(
         `${COMPANY_API_END_POINT}/register`,
@@ -30,7 +35,7 @@ const CompanyCreate = () => {
       );
       if(res?.data?.success) {
         dispatch(setSingleCompany(res.data.company))
-        toast.success(res.data.message);
+        alert(res.data.message);
         const companyId = res?.data?.company?._id
         navigate(`/admin/companies/${companyId}`)
       }

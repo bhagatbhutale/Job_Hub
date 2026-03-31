@@ -12,6 +12,7 @@ export const registerCompany = async (req, res) => {
                 success:false
             })
         }
+
         let company = await Company.findOne({name: companyName});
         if(company) {
             return res.status(400).json({

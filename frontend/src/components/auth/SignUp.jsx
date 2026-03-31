@@ -1,84 +1,100 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../shared/Navbar'
-import { Label } from '@radix-ui/react-label'
-import { Input } from '../ui/input'
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
-import { Button } from '../ui/button'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { USER_API_END_POINT } from '@/utils/constant'
-import { toast } from 'sonner'
-import { useDispatch, useSelector } from 'react-redux'
-import store from '@/redux/store'
-import { setLoading } from '@/redux/authSlice'
-import { Loader2 } from 'lucide-react'
-
+import React, { useEffect, useState } from "react";
+import Navbar from "../shared/Navbar";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "../ui/input";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Button } from "../ui/button";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import store from "@/redux/store";
+import { setLoading } from "@/redux/authSlice";
+import { Loader2 } from "lucide-react";
 
 const SignUp = () => {
   const [input, setInput] = useState({
     fullname: "",
-    email:"",
+    email: "",
     phoneNumber: "",
     password: "",
     role: "",
-   file: null
-  })
+    file: null,
+  });
 
-  const {loading, user} = useSelector(store => store.auth)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const { loading, user } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const changeEventHandler = (e) => {
-    setInput({...input, [e.target.name]: e.target.value});
-  }
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
   const changeFileHandler = (e) => {
     setInput({
       ...input,
       file: e.target.files[0],
     });
-  }
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
-    formData.append("fullname", input.fullname)
-    formData.append("email", input.email)
-    formData.append("phoneNumber", input.phoneNumber)
-    formData.append("password", input.password)
-    formData.append("role", input.role)
-    if(input.file) {
-      formData.append("file", input.file)
+    formData.append("fullname", input.fullname);
+    formData.append("email", input.email);
+    formData.append("phoneNumber", input.phoneNumber);
+    formData.append("password", input.password);
+    formData.append("role", input.role);
+    if (input.file) {
+      formData.append("file", input.file);
     }
-    console.log(input.file);
+
+    // does not provide va
+    if (
+      !input.fullname ||
+      !input.email ||
+      !input.phoneNumber ||
+      !input.password ||
+      !input.role
+    ) {
+      alert("All Fields are Required");
+      return;
+    }
+
+    //does not select ProfilePhoto
+    if (!input.file) {
+      alert("Select a Profile Photo");
+      return;
+    }
 
     try {
-      dispatch(setLoading(true))
+      dispatch(setLoading(true));
       const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
         headers: {
-          "Content-Type":"multipart/form-data"
+          "Content-Type": "multipart/form-data",
         },
-        withCredentials:true
-      } );
+        withCredentials: true,
+      });
 
-      if(res.data.success) {
-        navigate("/login")
-        toast.success(res.data.message)
+      if (res.data.success) {
+        navigate("/login");
+        toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
     }
+  };
 
-  }
-
-   // If a User Signin Does Not go on repeat login URL
-      useEffect(() => {
-        if(user) {
-          navigate("/")
-        }
-      }, [])
+  // If a User Signin Does Not go on repeat login URL
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div>
@@ -189,6 +205,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SignUp
+export default SignUp;

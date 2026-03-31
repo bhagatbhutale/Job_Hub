@@ -28,7 +28,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions))
 
- await connectDB();
+ 
 
 
 
@@ -44,6 +44,6 @@ app.use("/", (req, res) => {
 
 
 app.listen(PORT, () => {
-   
+   connectDB();
     console.log(`Server is running on port http://localhost:${PORT}...`);
 })
